@@ -3,6 +3,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const { version } = require('os');
 
 const versionFilePath = path.join(__dirname, 'version.txt');
 const downloadPath = path.join(__dirname, 'game');
@@ -54,14 +55,24 @@ function getCurrentVersion() {
     return fs.readFileSync(versionFilePath, 'utf8').trim();
 }
 
+// Při použití follow-redirects použij jiný název pro https
+const { https: followHttps } = require('follow-redirects');  // Použití follow-redirects pro sledování přesměrování
+
 // Funkce pro stažení nové verze hry
 function downloadNewVersion(latestVersion) {
     console.log(`Stahuji novou verzi ${latestVersion}...`);
-    const url = `https://github.com/qubas9/Slimer/releases/download/${latestVersion}/game.zip`; // Opravený odkaz na stahování
+    const url = `https://github.com/qubas9/Slimer/archive/refs/tags/${latestVersion}.zip`; // Opravený odkaz na stahování
 
     const file = fs.createWriteStream(path.join(downloadPath, 'game.zip'));
 
-    https.get(url, (response) => {
+    // Používáme followHttps místo https
+    followHttps.get(url, (response) => {
+        console.log('Stahování probíhá...', response.statusCode);
+
+        if (response.statusCode === 302) {
+            console.log('Přesměrování detekováno...');
+        }
+
         response.pipe(file);
 
         file.on('finish', () => {
@@ -75,6 +86,7 @@ function downloadNewVersion(latestVersion) {
         console.error('Chyba při stahování nové verze:', err);
     });
 }
+
 
 // Funkce pro spuštění hry
 function startGame() {
