@@ -1,22 +1,29 @@
 const { ipcRenderer } = require('electron');
 
-// Poslouchej na zprávu pro zobrazení informací o verzi
-ipcRenderer.on('show-update-info', (event, data) => {
-    // Zobrazíme informace v GUI
-    const updateInfoElement = document.getElementById('update-info');
-    const versionElement = document.getElementById('version');
-    const descriptionElement = document.getElementById('description');
-    const updateButton = document.getElementById('update-button');
-
-    versionElement.innerText = data.latestVersion;
-    descriptionElement.innerText = data.description;
-
-    // Zobrazíme aktualizace v UI
-    updateInfoElement.style.display = 'block';
-
-    // Přidání eventu pro aktualizaci hry (budeš muset implementovat stahování)
-    updateButton.addEventListener('click', () => {
-        console.log('Spouštím aktualizaci...');
-        // Tady přidej logiku pro stáhnutí a instalaci nové verze
+// Posluchač pro kontrolu dostupnosti aktualizace
+document.getElementById('check-update-btn').addEventListener('click', () => {
+    console.log('Kontroluji dostupné aktualizace...');
+    ipcRenderer.invoke('check-for-updates').then((updateInfo) => {
+        if (updateInfo) {
+            const { latestVersion, description } = updateInfo;
+            console.log('Dostupná nová verze:', latestVersion);
+            console.log('Popis aktualizace:', description);
+            document.getElementById('update-info').innerHTML = `
+                <h3>Nová verze k dispozici: ${latestVersion}</h3>
+                <p>${description}</p>
+                <button id="download-update">Stáhnout aktualizaci</button>
+            `;
+        } else {
+            console.log('Aplikace je aktuální.');
+            document.getElementById('update-info').innerHTML = '<p>Hra je aktuální!</p>';
+        }
+    }).catch((err) => {
+        console.error('Chyba při kontrole aktualizace:', err);
     });
+});
+
+// Posluchač pro spuštění hry
+document.getElementById('start-game-btn').addEventListener('click', () => {
+    console.log('Spouštím hru...');
+    // Přidej kód pro spuštění hry
 });
