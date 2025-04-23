@@ -53,7 +53,7 @@ class Game {
         for (let sprite of this.spriteToPhysics) {
             
                 // Update sprite position to match the corresponding physics object
-                let phObj = this.physic.objlist[this.spriteToPhysics.indexOf(sprite)];
+                let phObj = this.physic.PhObjectList[this.spriteToPhysics.indexOf(sprite)];
                 sprite.x = phObj.position.x;
                 sprite.y = phObj.position.y;
           
