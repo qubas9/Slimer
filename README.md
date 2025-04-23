@@ -1,5 +1,5 @@
 
-# 2D Physics and Rendering Game Engine
+# The README for the engine of the Slimer game
 
 This project is a simple 2D physics and rendering game engine built using JavaScript. It provides a structure for managing game objects (sprites), physics, and rendering. The game engine supports both physics-linked and free-floating sprites.
 
