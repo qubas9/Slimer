@@ -140,6 +140,6 @@ game.start();
 - **Flexible Object Creation**: Add both physics-linked and free-floating sprites.
 - **Game Loop**: The engine continuously updates physics and renders the scene.
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
