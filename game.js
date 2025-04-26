@@ -87,8 +87,8 @@ class Game {
      */
     gameLoop() {
         // Call all functions added to the game loop
-        for (let func of this.inGameLoop) {
-            func();
+        for (let entry of this.inGameLoop) {
+            entry.func();
         }
         // Update the physics engine
         this.physic.update();
@@ -111,12 +111,27 @@ class Game {
     /**
      * Adds a callback function to be executed in the start of the game loop.
      * @param {Function} func - The function to be executed in the game loop.
+     * @returns {Symbol} A unique identifier for the added function.
+     * This identifier can be used to remove the function later.
      */
     addToGameLoop(func) {
-        this.inGameLoop.push(func);
+        const id = Symbol(); // Create a unique identifier
+        this.inGameLoop.push({ id, func });
+        return id; // Return the identifier for later removal
     }
     
-
+    /**
+     * Removes a callback function from the game loop using its identifier.
+     * @param {Symbol} id - The unique identifier of the function to be removed.
+     */
+    removeFromGameLoop(id) {
+        const index = this.inGameLoop.findIndex(entry => entry.id === id);
+        if (index > -1) {
+            console.log("Removing function from game loop with id:", id);
+            this.inGameLoop.splice(index, 1);
+        }
+    }
+     
     /**
      * Starts the game by running the game loop.
      */
@@ -141,7 +156,7 @@ import Controls from "./controls.js";
 let c = new Controls({
     obj: game.physic.PhObjectList[objectId4]
 });
-game.addToGameLoop(c.update.bind(c));
+let cf = game.addToGameLoop(c.update.bind(c));
 
 // Test for the `bindRelease` method
 c.bind("nameww", "w", (obj, i) => {
@@ -196,6 +211,26 @@ console.log("Exported bindings:", bindings);
 const boundKey = c.getBoundKey("moveRight");
 console.log("Key bound to moveRight:", boundKey);
 
+
+let co = new Controls({
+    obj: game.physic.PhObjectList[objectId1],
+    import: bindings,
+    callbackMap: {
+        "moveRight": (obj) => {
+            console.log("co Move right action triggered", obj);
+            obj.applyForce(new Vector(5, 0));
+        },
+        "jump": (obj) => {
+            console.log("co Jump action captured", obj);
+            obj.applyForce(new Vector(0, -10));
+        }
+    }
+});
+setTimeout(()=> {
+    console.log("sfdfsddfssssssssssssssssssssssssssssssf");
+game.removeFromGameLoop(cf);
+game.addToGameLoop(co.update.bind(co));
+},1000)
 // Create a free-floating sprite (not linked to any physics object)
 let freeSprite = game.addFreeSprite(400, 200, "./Slimer.png", 20, 20, 4);
 

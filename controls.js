@@ -23,6 +23,7 @@ class Control {
         this.namedTypes = new Map();
 
         this.capturing = null;
+        this.paused = false;
 
         if (options.callbackMap) {
             this._importBindingsInternal(options.callbackMap);
@@ -88,29 +89,31 @@ class Control {
      * Updates the key states and calls the corresponding callbacks.
      */
     update() {
-        for (const [key, duration] of this.keyStates.entries()) {
-            this.keyStates.set(key, duration + 1);
+        if (!this.paused){    
+            for (const [key, duration] of this.keyStates.entries()) {
+                this.keyStates.set(key, duration + 1);
 
-            if (this.bindings.has(key)) {
-                this.bindings.get(key)(this.obj, duration + 1);
+                if (this.bindings.has(key)) {
+                    this.bindings.get(key)(this.obj, duration + 1);
+                }
+
+                if (this.onceBindings.has(key) && this.pressedThisFrame.has(key)) {
+                    this.onceBindings.get(key)(this.obj);
+                }
             }
 
-            if (this.onceBindings.has(key) && this.pressedThisFrame.has(key)) {
-                this.onceBindings.get(key)(this.obj);
+            for (const key in this.releaseTickKeys) {
+                const data = this.releaseTickKeys[key];
+                if (data.ticks > 0) {
+                    data.ticks--;
+                    data.callback(this.obj);
+                } else {
+                    delete this.releaseTickKeys[key];
+                }
             }
+
+            this.pressedThisFrame.clear();
         }
-
-        for (const key in this.releaseTickKeys) {
-            const data = this.releaseTickKeys[key];
-            if (data.ticks > 0) {
-                data.ticks--;
-                data.callback(this.obj);
-            } else {
-                delete this.releaseTickKeys[key];
-            }
-        }
-
-        this.pressedThisFrame.clear();
     }
 
     /**
@@ -288,6 +291,19 @@ pressed.
      */
     getBoundKey(name) {
         return this.namedBindings.get(name) || null;
+    }
+
+    /**
+     * Pauses the control system, preventing key events from being processed.
+     */
+    pause() {
+        this.paused = true;
+    }
+    /**
+     * Unpauses the control system, allowing key events to be processed again.
+     */
+    unpause() {
+        this.paused = false;
     }
 
     /**

@@ -15,6 +15,7 @@ The constructor initializes a new controller for the given object. When creating
 - `options` (Object, optional): An object containing configuration options for the controller.
   - `obj` (Object, optional): The object that will be controlled. If not provided, it defaults to `null`.
   - `initializer` (Function, optional): A function that is called after the object is initialized. It can be used to perform additional setup for the object.
+  not entyrealy working yet:
   - `import` (Object, optional): An object containing previously exported key bindings and corresponding functions.
   - `callbackMap` (Object, optional): A mapping of action names to callback functions that will be used when importing key bindings.
 
@@ -295,6 +296,40 @@ Returns the key currently assigned to a specific action. If no key is assigned, 
 ```
 const key = control.getBoundKey('jump');
 console.log(key);  // Might return 'Space' if Space is bound to the jump action
+```
+
+### `pause()`
+
+```
+pause()
+```
+
+**Description**:  
+Pauses all key bindings, preventing any actions from being triggered. This is useful for temporarily disabling controls, such as during a pause menu or cutscene.
+
+**Parameters**:  
+None.
+
+**Usage Example**:
+```
+control.pause();  // Disables all key bindings
+```
+
+### `unpause()`
+
+```
+unpause()
+```
+
+**Description**:  
+Resumes all key bindings, re-enabling actions that were previously paused.
+
+**Parameters**:  
+None.
+
+**Usage Example**:
+```
+control.unpause();  // Re-enables all key bindings
 ```
 
 ## Conclusion
