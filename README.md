@@ -29,8 +29,8 @@ The engine is divided into the following modules, each responsible for a specifi
 ### Module Dependency Diagram
 
 ```
-Control
-   ↑
+    Control
+   
 Game → Render
    ↘
    Physic → Vector
@@ -40,28 +40,28 @@ Game → Render
 
 The documentation is divided into multiple files. Each file provides detailed information about a specific module:
 
-1. [Render Module Documentation](docs/render.md)  
+1. [Render Module Documentation](DOC/render.md)  
    Detailed explanation of the `Render` module.
 
-2. [Physic Module Documentation](docs/physic.md)  
+2. [Physic Module Documentation](DOC/physic.md)  
    Comprehensive guide to the `Physic` module.
 
-3. [Game Module Documentation](docs/game.md)  
+3. [Game Module Documentation](DOC/game.md)  
    Overview of the `Game` module.
 
-4. [Control Module Documentation](docs/control.md)  
+4. [Control Module Documentation](DOC/controls.md)  
    Detailed description of the `Control` module.
 
-5. [Vector Module Documentation](docs/vector.md)  
+5. [Vector Module Documentation](DOC/vector.md)  
    Explanation of the `Vector` module and its utility functions.
 
 ### Getting Started
 
-Refer to the [Installation Guide](docs/installation.md) for instructions on how to set up and use the engine in your project.
+Refer to the [Installation Guide](DOC/installation.md) for instructions on how to set up and use the engine in your project.
 
 ### Example Usage
 
-For a quick start, check out the [Example Usage](docs/example.md) file, which demonstrates how to create a simple game using the engine.
+For a quick start, check out the [Example Usage](DOC/example.md) file, which demonstrates how to create a simple game using the engine.
 
 ## Features
 
@@ -72,10 +72,9 @@ For a quick start, check out the [Example Usage](docs/example.md) file, which de
 - **Modular Design**: Each module is independent and reusable.
 - **Vector Utilities**: Perform common 2D vector operations efficiently.
 
-## Contributing
-
-Refer to the [Contributing Guidelines](docs/contributing.md) for details on how to contribute to the project.
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+
