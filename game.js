@@ -18,6 +18,7 @@ class Game {
         this.physic = new Physic(gravity, drag); // Physics engine instance
         this.render = new Render(width, height, background); // Renderer instance
         this.spriteToPhysics = []; // Map to link sprites to physics objects
+        this.inGameLoop = []; // List of functions to be called in the game loop
     }
 
     /**
@@ -85,6 +86,10 @@ class Game {
      * and renders the updated scene.
      */
     gameLoop() {
+        // Call all functions added to the game loop
+        for (let func of this.inGameLoop) {
+            func();
+        }
         // Update the physics engine
         this.physic.update();
 
@@ -104,6 +109,15 @@ class Game {
     }
 
     /**
+     * Adds a callback function to be executed in the start of the game loop.
+     * @param {Function} func - The function to be executed in the game loop.
+     */
+    addToGameLoop(func) {
+        this.inGameLoop.push(func);
+    }
+    
+
+    /**
      * Starts the game by running the game loop.
      */
     start() {
@@ -111,16 +125,76 @@ class Game {
     }
 }
 
-// Usage Example:
+
 
 // Create game instance
 let game = new Game(800, 600, 0.1, 1, [0, 0, 0]);
 
 // Create physics objects with linked sprites
-let { sprite: sprite1, objectId: objectId1 } = game.addPhysicsObjectWithSprite(100, 400, "./Slimer.png", 20, 20, 4, 100, -0.1, 0, 0.9);
-let { sprite: sprite2, objectId: objectId2 } = game.addPhysicsObjectWithSprite(100, 200, "./Slimer.png", 20, 20, 4, 100, -0.1, 0, 0.9);
-let { sprite: sprite3, objectId: objectId3 } = game.addPhysicsObjectWithSprite(100, 300, "./Slimer.png", 20, 20, 4, 100, -0.1, 0, 0.9);
+let { sprite: sprite1, objectId: objectId1 } = game.addPhysicsObjectWithSprite(100, 400, "./Slimer.png", 20, 20, 4, 100, 0.1, 0, 0.9);
+let { sprite: sprite2, objectId: objectId2 } = game.addPhysicsObjectWithSprite(100, 200, "./Slimer.png", 20, 20, 4, 100, 0.1, 0, 0.9);
+let { sprite: sprite3, objectId: objectId3 } = game.addPhysicsObjectWithSprite(100, 300, "./Slimer.png", 20, 20, 4, 100, 0.1, 0, 0.9);
 let { sprite: sprite4, objectId: objectId4 } = game.addPhysicsObjectWithSprite(100, 100, "./Slimer.png", 20, 20, 4, 100, 0.1, 0, 0.9);
+
+import Vector from "./vector.js";
+import Controls from "./controls.js";
+let c = new Controls({
+    obj: game.physic.PhObjectList[objectId4]
+});
+game.addToGameLoop(c.update.bind(c));
+
+// Test for the `bindRelease` method
+c.bind("nameww", "w", (obj, i) => {
+    console.log("ArrowUp pressed", obj, i);
+    obj.applyForce(new Vector(0, -i));
+});
+
+// Test for the `bindPress` method
+c.bindOnce("names", "s", (obj) => {
+    console.log("ArrowDown pressed", obj);
+    obj.applyForce(new Vector(0, 1));
+});
+
+// Test for the `bindHold` method
+c.bindRelease("nasme", "a", (obj,i) => {
+    console.log("ArrowLeft held", obj, i);
+    obj.applyForce(new Vector(-i, 0));
+});
+
+c.bindWithReleaseTick("naame", "d", (obj, i) => {
+    console.log("ArrowRight held", obj, i);
+    obj.applyForce(new Vector(i, 0));
+});
+
+// Test for the `captureBinding` method
+c.captureBinding("jump", "once", (obj) => {
+    console.log("Jump action captured", obj);
+    obj.applyForce(new Vector(0, -10));
+});
+
+// Test for the `setBinding` method
+c.setBinding("moveRight", "hold", "ArrowRight", (obj) => {
+    console.log("Move right action triggered", obj);
+    obj.applyForce(new Vector(5, 0));
+});
+
+// Test for the `updateBinding` method
+c.updateBinding("moveRight", (obj) => {
+    console.log("Updated move right action", obj);
+    obj.applyForce(new Vector(10, 0));
+});
+
+// Test for the `updateBindingKey` method
+c.updateBindingKey("moveRight", "q");
+console.log("Updated key for moveRight action to 'd'");
+
+// Test for the `exportBindings` method
+const bindings = c.exportBindings();
+console.log("Exported bindings:", bindings);
+
+// Test for the `getBoundKey` method
+const boundKey = c.getBoundKey("moveRight");
+console.log("Key bound to moveRight:", boundKey);
 
 // Create a free-floating sprite (not linked to any physics object)
 let freeSprite = game.addFreeSprite(400, 200, "./Slimer.png", 20, 20, 4);

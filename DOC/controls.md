@@ -34,6 +34,22 @@ const control = new Control({
         obj.health = 150;  // Example: modify health
     }
 });
+
+// Export key bindings
+const exportedBindings = control.exportBindings();
+console.log("Exported Bindings:", exportedBindings);
+
+// Later, upload the exported key bindings to a new Control instance
+const newControl = new Control({
+    obj: player,
+    import: exportedBindings,
+    callbackMap: {
+        moveUp: (obj) => obj.move('up'),
+        jump: (obj) => obj.jump(),
+        sprint: (obj, duration) => console.log(`Sprinting for ${duration} frames.`)
+    }
+});
+console.log("Key bindings successfully uploaded to the new control instance with callback mappings.");
 ```
 
 ## Methods
@@ -55,43 +71,91 @@ None.
 control.update();  // Call this in each frame to process actions
 ```
 
-### `bind(key, callback)`
+### `bind(name, key, callback)`
 
 ```
-bind(key, callback)
+bind(name, key, callback)
 ```
 
 **Description**:  
 Binds a function to a specific key for continuous holding (i.e., the action is performed as long as the key is held down).
 
 **Parameters**:
+- `name` (String): The name of the action.
 - `key` (String): The key to bind the action to.
 - `callback` (Function): The function that will be executed while the key is held down.
 
 **Usage Example**:
 ```
-control.bind('ArrowUp', (obj) => {
+control.bind('moveUp', 'ArrowUp', (obj) => {
     obj.move('up');
 });
 ```
 
-### `bindOnce(key, callback)`
+### `bindOnce(name, key, callback)`
 
 ```
-bindOnce(key, callback)
+bindOnce(name, key, callback)
 ```
 
 **Description**:  
 Binds a function to a specific key for one-time pressing (i.e., the action is performed only when the key is pressed once).
 
 **Parameters**:
+- `name` (String): The name of the action.
 - `key` (String): The key to bind the action to.
 - `callback` (Function): The function that will be executed upon key press.
 
 **Usage Example**:
 ```
-control.bindOnce('Space', (obj) => {
+control.bindOnce('jump', 'Space', (obj) => {
     obj.jump();
+});
+```
+
+### `bindRelease(name, key, callback)`
+
+```
+bindRelease(name, key, callback)
+```
+
+**Description**:  
+Binds a function to a specific key, but the callback is triggered only after the key is released. The callback receives two parameters: the object and the duration the key was held down.
+
+**Parameters**:
+- `name` (String): The name of the action.
+- `key` (String): The key to bind the action to.
+- `callback` (Function): The function that will be executed after the key is released. The function receives two parameters:
+  - `obj` (Object): The object associated with the action.
+  - `duration` (Number): The number of frames the key was held down.
+
+**Usage Example**:
+```
+control.bindRelease('sprint', 'Shift', (obj, duration) => {
+    console.log(`Shift was held for ${duration} frames.`);
+});
+```
+
+### `bindWithReleaseTick(name, key, callback)`
+
+```
+bindWithReleaseTick(name, key, callback)
+```
+
+**Description**:  
+Binds a function to a key similarly to `bind()`, but unlike it, this method will also execute the callback one extra frame after the key is released. This can be useful for smoothing transitions, slow fading, or "soft release" controls.
+
+**Parameters**:
+- `name` (String): The name of the action.
+- `key` (String): The key to bind the action to.
+- `callback(obj, frames)` (Function): The function that will be executed repeatedly while the key is held down and one extra time after release.
+  - `obj` is the controlled object.
+  - `frames` is the number of frames the key has been held (even for the extra release tick).
+
+**Usage Example**:
+```
+control.bindWithReleaseTick('moveDown', 'ArrowDown', (obj, frames) => {
+    obj.move('down', frames);
 });
 ```
 
@@ -106,8 +170,8 @@ Captures a key press, which will then be automatically assigned to the specified
 
 **Parameters**:
 - `name` (String): The action name to bind to the key.
-- `type` (String): The type of binding, either "hold" for continuous holding or "once" for one-time press.
-- `callback` (Function): The function to be executed when the key is pressed.
+- `type` (String): The type of binding, either "hold", "once", or "release" to match the behavior of `bind`, `bindOnce`, or `bindRelease`.
+- `callback` (Function): The function to be executed when the key is pressed or released, depending on the type.
 
 **Usage Example**:
 ```
@@ -123,13 +187,34 @@ setBinding(name, type, key, callback)
 ```
 
 **Description**:  
-Sets a binding for a specific action name (e.g., jump, moveUp). This allows not only to bind new keys but also to modify existing bindings.
+Sets a binding for a specific action name (e.g., jump, moveUp). The `type` parameter determines whether the binding behaves like `bind`, `bindOnce`, `bindRelease`, or `bindWithReleaseTick`.
+
+**Parameters**:
+- `name` (String): The action name to bind.
+- `type` (String): The type of binding. Valid values are:
+    - `"hold"`: Behaves like `bind`.
+    - `"once"`: Behaves like `bindOnce`.
+    - `"release"`: Behaves like `bindRelease`.
+    - `"releaseTick"`: Behaves like `bindWithReleaseTick`.
+- `key` (String): The key to bind to the action.
+- `callback` (Function): The function that will be executed when the key is pressed, held, or released, depending on the binding type.
+
+**Usage Example**:
+```
+control.setBinding('moveLeft', 'hold', 'ArrowLeft', (obj) => {
+        obj.move('left');
+});
+```
 
 **Parameters**:
 - `name` (String): The action name.
-- `type` (String): The type of action ("hold" or "once").
+- `type` (String): The type of action. Valid values are:
+    - `"hold"`: The action is performed continuously while the key is held down.
+    - `"once"`: The action is performed only once when the key is pressed.
+    - `"release"`: The action is performed when the key is released.
+    - `"releaseTick"`: The action is performed continuously while the key is held down and one extra time after the key is released.
 - `key` (String): The key to bind to the action.
-- `callback` (Function): The function that will be executed when the key is pressed.
+- `callback` (Function): The function that will be executed when the key is pressed or released, depending on the type.
 
 **Usage Example**:
 ```
@@ -149,7 +234,7 @@ Updates the function assigned to an existing action. This allows changing the be
 
 **Parameters**:
 - `name` (String): The action name.
-- `newCallback` (Function): The new function that will be executed when the key is pressed.
+- `newCallback` (Function): The new function that will be executed when the key is pressed or released, depending on the original binding type.
 
 **Usage Example**:
 ```
@@ -183,7 +268,7 @@ exportBindings()
 ```
 
 **Description**:  
-Returns an exported object containing all current key bindings and their types. This object can be saved for later use or sharing.
+Returns an exported object containing all current key bindings, their types, and associated actions. This object can be saved for later use or sharing.
 
 **Parameters**:  
 None.
