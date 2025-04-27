@@ -19,7 +19,7 @@ Creates a new `Game` instance.
 
 ## Methods
 
-### `addPhysicsObjectWithSprite(x, y, spriteSrc, spriteWidth, spriteHeight, scale, mass, g, restitution, drag, hitbox)`
+### `addPhysicsObjectWithSprite(x, y, spriteSrc, spriteWidth, spriteHeight, scale, mass, g, restitution, drag, hitbox, colisionType, softCollisionPercent, softCollisionSlop)`
 
 **Description**:  
 Adds a physics object with a linked sprite.
@@ -29,11 +29,14 @@ Adds a physics object with a linked sprite.
 - `spriteSrc` (String): URL or file path of the sprite image.
 - `spriteWidth`, `spriteHeight` (Number): Dimensions of the sprite in pixels.
 - `scale` (Number): Scale factor to resize the sprite (default is 1).
-- `mass` (Number): Mass of the physics object, affecting its response to forces (default is 1).
-- `g` (Number): Gravity specific to this object, overriding the global gravity (default is the global gravity).
-- `restitution` (Number): Bounciness of the object, where 1 is fully elastic and 0 is inelastic (default is 1).
-- `drag` (Number): Drag coefficient specific to this object, overriding the global drag (default is the global drag).
-- `hitbox` (Hitbox): The hitbox defining the object's collision boundaries. If `true`, a default hitbox is created.
+- `mass` (Number|Boolean, default is 1): Mass of the physics object. Pass `true` for unmovable objects.
+- `g` (Number): Gravity specific to this object, overriding the global gravity.
+- `restitution` (Number): Bounciness of the object, where 1 is fully elastic and 0 is inelastic.
+- `drag` (Number): Drag coefficient specific to this object, overriding the global drag.
+- `hitbox` (boolean|Hitbox): If `true`, generates a hitbox from the sprite size; otherwise, a custom hitbox can be passed.
+- `colisionType` (String, default is "hard"): Type of collision ("soft" or "hard").
+- `softCollisionPercent` (Number, default is 0.5): Percentage of soft collision.
+- `softCollisionSlop` (Number, default is 0.01): Slop for soft collision.
 
 **Returns**:
 - `Object`: The created sprite and its physics object ID.

@@ -1,4 +1,4 @@
-# Example Usage `untested`
+# Example Usage
 
 This example demonstrates how to create a simple game using the Slimer Game Engine.
 
@@ -16,7 +16,7 @@ This example demonstrates how to create a simple game using the Slimer Game Engi
    Add a physics object with a linked sprite:
    ```javascript
    const { sprite, objectId } = game.addPhysicsObjectWithSprite(
-       100, 400, './sprite.png', 50, 50, 1, 10, 0.1, 0.8, 0.9
+       100, 400, './sprite.png', 50, 50, 1, 10, 0.1, 0.8, 0.9, true, "soft", 0.5, 0.01
    );
    ```
 
@@ -47,7 +47,7 @@ import Vector from './vector.js';
 const game = new Game(800, 600, 0.1, 1, [0, 0, 0]);
 
 const { sprite, objectId } = game.addPhysicsObjectWithSprite(
-    100, 400, './sprite.png', 50, 50, 1, 10, 0.1, 0.8, 0.9
+    100, 400, './sprite.png', 50, 50, 1, 10, 0.1, 0.8, 0.9, true, "soft", 0.5, 0.01
 );
 
 const controls = new Control({ obj: game.physic.PhObjectList[objectId] });

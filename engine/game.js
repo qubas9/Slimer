@@ -29,22 +29,61 @@ class Game {
      * @param {number} spriteWidth - The width of the sprite.
      * @param {number} spriteHeight - The height of the sprite.
      * @param {number} scale - The scale factor for the sprite (default is 1).
-     * @param {number} mass - The mass of the physics object (default is 1).
+     * @param {number|boolean} mass - The mass of the physics object (default is 1). For unmovable objects, pass `true`.
      * @param {number} g - The gravity for the physics object (default is the global gravity).
      * @param {number} restitution - The restitution (bounciness) of the object (default is 1).
      * @param {number} drag - The drag coefficient of the object (default is the global drag).
-     * @param {boolean} hitbox - Whether the physics object should have a hitbox (default is true).
+     * @param {boolean|Hitbox} hitbox - If `true`, generates a hitbox from the sprite size; otherwise, a custom hitbox can be passed (default is `true`).
+     * @param {string} colisionType - Type of collision ("soft" or "hard", default is "hard").
+     * @param {number} softCollisionPercent - Percentage of soft collision (default is 0.5).
+     * @param {number} softCollisionSlop - Slop for soft collision (default is 0.01).
      * @returns {Object} The created sprite and its associated physics object ID.
+     * @throws {Error} If any parameter is of an incorrect type.
      */
-    addPhysicsObjectWithSprite(x, y, spriteSrc, spriteWidth, spriteHeight, scale = 1, mass = 1, g = this.g, restitution = 1, drag = this.drag, hitbox = true) {
-        
+    addPhysicsObjectWithSprite(x, y, spriteSrc, spriteWidth, spriteHeight, scale = 1, mass = 1, g = this.g, restitution = 1, drag = this.drag, hitbox = true, colisionType = "hard", softCollisionPercent = 0.5, softCollisionSlop = 0.01) {
+        if (typeof x !== "number" || typeof y !== "number") {
+            throw new Error("x and y must be numbers");
+        }
+        if (typeof spriteSrc !== "string") {
+            throw new Error("spriteSrc must be a string");
+        }
+        if (typeof spriteWidth !== "number" || typeof spriteHeight !== "number") {
+            throw new Error("spriteWidth and spriteHeight must be numbers");
+        }
+        if (typeof scale !== "number") {
+            throw new Error("scale must be a number");
+        }
+        if (typeof mass !== "number" && mass !== true) {
+            throw new Error("mass must be a number or true for unmovable objects");
+        }
+        if (typeof g !== "number") {
+            throw new Error("g must be a number");
+        }
+        if (typeof restitution !== "number") {
+            throw new Error("restitution must be a number");
+        }
+        if (typeof drag !== "number") {
+            throw new Error("drag must be a number");
+        }
+        if (typeof colisionType !== "string") {
+            throw new Error("colisionType must be a string");
+        }
+        if (typeof softCollisionPercent !== "number") {
+            throw new Error("softCollisionPercent must be a number");
+        }
+        if (typeof softCollisionSlop !== "number") {
+            throw new Error("softCollisionSlop must be a number");
+        }
+
         // Create a hitbox if not provided
         if (hitbox === true) {
             hitbox = this.physic.makeHitbox(0, 0, spriteWidth * scale, spriteHeight * scale);
+        }else if (!(hitbox instanceof Hitbox)) {
+            throw new Error("hitbox must be a Hitbox or true");
         }
 
         // Create physics object
-        let objectId = this.physic.addObj(x, y, hitbox, mass, g, drag, restitution);
+        let objectId = this.physic.addObj(x, y, hitbox, mass, g, drag, restitution, colisionType, softCollisionPercent, softCollisionSlop);
         
         // Create the linked sprite
         let sprite = this.render.makeSprite(x, y, spriteSrc, spriteWidth, spriteHeight, scale, () => {
@@ -69,8 +108,22 @@ class Game {
      * @param {number} spriteHeight - The height of the sprite.
      * @param {number} scale - The scale factor for the sprite (default is 1).
      * @returns {Sprite} The created free-floating sprite.
+     * @throws {Error} If any parameter is of an incorrect type.
      */
     addFreeSprite(x, y, spriteSrc, spriteWidth, spriteHeight, scale = 1) {
+        if (typeof x !== "number" || typeof y !== "number") {
+            throw new Error("x and y must be numbers");
+        }
+        if (typeof spriteSrc !== "string") {
+            throw new Error("spriteSrc must be a string");
+        }
+        if (typeof spriteWidth !== "number" || typeof spriteHeight !== "number") {
+            throw new Error("spriteWidth and spriteHeight must be numbers");
+        }
+        if (typeof scale !== "number") {
+            throw new Error("scale must be a number");
+        }
+
         let sprite = this.render.makeSprite(x, y, spriteSrc, spriteWidth, spriteHeight, scale, () => {
             this.render.render(); // Render when the image is loaded
         });
@@ -146,10 +199,10 @@ class Game {
 let game = new Game(800, 600, 0.1, 1, [0, 0, 0]);
 
 // Create physics objects with linked sprites
-let { sprite: sprite1, objectId: objectId1 } = game.addPhysicsObjectWithSprite(100, 400, "./Slimer.png", 20, 20, 4, 100, 0.1, 0, 0.9);
-let { sprite: sprite2, objectId: objectId2 } = game.addPhysicsObjectWithSprite(100, 200, "./Slimer.png", 20, 20, 4, 100, 0.1, 0, 0.9);
-let { sprite: sprite3, objectId: objectId3 } = game.addPhysicsObjectWithSprite(100, 300, "./Slimer.png", 20, 20, 4, 100, 0.1, 0, 0.9);
-let { sprite: sprite4, objectId: objectId4 } = game.addPhysicsObjectWithSprite(100, 100, "./Slimer.png", 20, 20, 4, 100, 0.1, 0, 0.9);
+let { sprite: sprite1, objectId: objectId1 } = game.addPhysicsObjectWithSprite(100, 400, "./Slimer.png", 20, 20, 4, 100, 0.1, 0, 0.9,true, "hard", 0.5, 0.01);
+let { sprite: sprite2, objectId: objectId2 } = game.addPhysicsObjectWithSprite(100, 200, "./Slimer.png", 20, 20, 4, 100, 0, 0, 0.9,true, "hard", 0.5, 0.01);
+let { sprite: sprite3, objectId: objectId3 } = game.addPhysicsObjectWithSprite(100, 300, "./Slimer.png", 20, 20, 4, 100, 0.1, 0, 0.9,true, "soft", 0.5, 0.01);
+let { sprite: sprite4, objectId: objectId4 } = game.addPhysicsObjectWithSprite(100, 100, "./Slimer.png", 20, 20, 4, 100, 0.1, 0, 0.9,true, "soft", 0.5, 0.01);
 
 import Vector from "./vector.js";
 import Controls from "./controls.js";
@@ -226,13 +279,6 @@ let co = new Controls({
         }
     }
 });
-setTimeout(()=> {
-    console.log("sfdfsddfssssssssssssssssssssssssssssssf");
-game.removeFromGameLoop(cf);
-game.addToGameLoop(co.update.bind(co));
-},1000)
-// Create a free-floating sprite (not linked to any physics object)
-let freeSprite = game.addFreeSprite(400, 200, "./Slimer.png", 20, 20, 4);
 
 // Start the game loop
 game.start();
