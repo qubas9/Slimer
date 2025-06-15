@@ -2,7 +2,6 @@ name: Notify Discord on GitHub Release
 
 on:
   release:
-    types: [published]
 
 jobs:
   notify:
@@ -14,6 +13,10 @@ jobs:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
 
           content: |
-            🎉 Nový release: **${{ github.event.release.name }}**
-            Více info: ${{ github.event.release.html_url }}
+                  🚀 **${{ github.event.action}}** – **${{ github.event.release.tag_name }}**
+
+                  📦 **${{ github.event.release.name }}**
+
+                  🔗 <${{ github.event.release.html_url }}>
+
 
