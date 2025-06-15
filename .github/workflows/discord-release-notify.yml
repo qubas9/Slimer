@@ -1,7 +1,7 @@
 name: Notify Discord on GitHub Release
 
 on:
-  release:
+  release
 
 jobs:
   notify:
