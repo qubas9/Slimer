@@ -11,7 +11,9 @@ jobs:
       - name: Send message to Discord webhook
         uses: Ilshidur/action-discord@v2
         with:
-          webhook_url: ${{ https://discord.com/api/webhooks/1383852572938338425/Evw9r-2pDLewvs60FXa-VMY73VY3kjZVJPyp5VGeRMwfs3wRqN26vqKWcAj5OgQPEZcI }}
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+
           content: |
             🎉 Nový release: **${{ github.event.release.name }}**
             Více info: ${{ github.event.release.html_url }}
+
