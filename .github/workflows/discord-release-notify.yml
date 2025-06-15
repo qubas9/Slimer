@@ -7,16 +7,16 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Send message to Discord webhook
-        uses: Ilshidur/action-discord@0.3.2
-        with:
-          webhook_url: "https://discord.com/api/webhooks/1383852572938338425/Evw9r-2pDLewvs60FXa-VMY73VY3kjZVJPyp5VGeRMwfs3wRqN26vqKWcAj5OgQPEZcI" 
-
-          content: |
-                  🚀 **${{ github.event.action}}** – **${{ github.event.release.tag_name }}**
-
-                  📦 **${{ github.event.release.name }}**
-
-                  🔗 <${{ github.event.release.html_url }}>
+      - name: Notify Discord via curl
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          RELEASE_ACTION: ${{ github.event.action }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          RELEASE_NAME: ${{ github.event.release.name }}
+          RELEASE_URL: ${{ github.event.release.html_url }}
+        run: |
+          curl -H "Content-Type: application/json" -X POST \
+            -d "{\"content\":\"🚀 **${RELEASE_ACTION}** – **${RELEASE_TAG}**\n📦 **${RELEASE_NAME}**\n🔗 ${RELEASE_URL}\"}" \
+            "$DISCORD_WEBHOOK"
 
 
