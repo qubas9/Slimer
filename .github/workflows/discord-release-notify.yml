@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send message to Discord webhook
-        uses: Ilshidur/action-discord@v2
+        uses: Ilshidur/action-discord@0.3.2
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
 
