@@ -18,7 +18,7 @@ class LevelLoader{
         }
 
         for(let element in setings){
-            if(!setings[element].setings.imageSrc){continue}
+            if(!setings[element].setings || !setings[element].setings.imageSrc){continue}
             setings[element].setings.imageSrc = this.pathPrefix + setings[element].setings.imageSrc
         }
 
