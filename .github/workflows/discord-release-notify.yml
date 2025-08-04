@@ -1,7 +1,8 @@
 name: Notify Discord on GitHub Release
 
 on:
-  release
+  release:
+    types: [published, prereleased]
 
 jobs:
   notify:
@@ -10,13 +11,20 @@ jobs:
       - name: Notify Discord via curl
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          RELEASE_ACTION: ${{ github.event.action }}
           RELEASE_TAG: ${{ github.event.release.tag_name }}
           RELEASE_NAME: ${{ github.event.release.name }}
           RELEASE_URL: ${{ github.event.release.html_url }}
+          IS_PRERELEASE: ${{ github.event.release.prerelease }}
         run: |
+          if [ "$IS_PRERELEASE" = "true" ]; then
+            TYPE="🧪 Pre-release"
+          else
+            TYPE="🚀 Release"
+          fi
+
           curl -H "Content-Type: application/json" -X POST \
-            -d "{\"content\":\"🚀 **${RELEASE_ACTION}** – **${RELEASE_TAG}**\n📦 **${RELEASE_NAME}**\n🔗 ${RELEASE_URL}\"}" \
+            -d "{\"content\":\"${TYPE} **${RELEASE_TAG}**\n📄 ${RELEASE_NAME}\n🔗 ${RELEASE_URL}\"}" \
             "$DISCORD_WEBHOOK"
+
 
 
