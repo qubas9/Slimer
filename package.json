@@ -1,0 +1,22 @@
+{
+  "name": "slimer",
+  "version": "0.0.0-0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qubas9/Slimer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qubas9/Slimer/issues"
+  },
+  "homepage": "https://github.com/qubas9/Slimer#readme",
+  "dependencies": {
+    "type3games-engine": "^1.3.5-0"
+  }
+}

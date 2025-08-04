@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slimer</title>
-    
+    <title>Document</title>
 </head>
 <body>
+    <script type="module">
+        import {LevelLoader} from "./node_modules/type3games-engine/engine.js"
+            console.log(LevelLoader);
+            let loader = new LevelLoader({},"")
+            loader.loadDefaultFromJSON("../.././levelSeting.json")
+            loader.loadJSON("../.././level.json")
+    </script>
 </body>
-<script type="module" src="engine/game.js"></script>
-<script type="module" src="engine/physic.js"></script>
-<script type="module" src="engine/vector.js"></script>
-<script type="module" src="engine/render.js"></script>
-<script type="module" src="levels/level1.js"></script>
 </html>

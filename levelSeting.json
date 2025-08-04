@@ -1,0 +1,51 @@
+{
+  "setings": {"grid": {
+      "size": 32
+    },
+    "p": {
+      "type": "player",
+      "setings": {
+        "imageSrc": "../.././testasets/Slimer1.png",
+        "width": 30,
+        "height": 30,
+        "onClickAcceleration": 200,
+        "jumpAcceleration": 110,
+        "inAirDrag": 1,
+        "gravity": {
+          "x": 0,
+          "y": 300
+        },
+        "maxXSpeed": 640,
+        "maxBoost": 1200,
+        "colisionOfsset": 0.3
+      }
+    },
+     "b": {
+        "type": "block",
+        "setings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "../.././testasets/Stone-Brick.png",
+            "friction": 0.9
+      }
+    },
+    "s": {
+        "type": "sprite",
+        "setings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "../.././testasets/Stone-Brick.png"
+          
+      }
+    },
+    "render": {
+      
+      "scale": 2,
+      "cameraMinX": -882,
+      "cameraMaxX": 0,
+      "cameraMaxY": 100000,
+      "cameraMinY": 300,
+      "background": [240, 240, 240]
+    }
+  }
+}
