@@ -9,9 +9,9 @@
     <script type="module">
         import {LevelLoader} from "./node_modules/type3games-engine/engine.js"
             console.log(LevelLoader);
-            let loader = new LevelLoader({},"")
-            loader.loadDefaultFromJSON("../.././levelSeting.json")
-            loader.loadJSON("../.././level.json")
+            let loader = new LevelLoader({},"../../")
+            loader.loadDefaultFromJSON("./levelSeting.json")
+            loader.loadJSON("./level.json")
     </script>
 </body>
 </html>
