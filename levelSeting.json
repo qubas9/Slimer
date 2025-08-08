@@ -38,6 +38,24 @@
             "friction": 0.9
       }
     },
+    "c": {
+        "type": "block",
+        "setings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "./assets/Brick_1.png",
+            "friction": 0.9
+      }
+    },
+    "d": {
+        "type": "block",
+        "setings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "./assets/Dirt_block.png",
+            "friction": 0.9
+      }
+    },
     "render": {
       
       "scale": 1,
