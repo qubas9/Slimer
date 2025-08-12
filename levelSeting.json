@@ -56,6 +56,24 @@
             "friction": 0.9
       }
     },
+     "s": {
+        "type": "block",
+        "setings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "./assets/Cobblestone.png",
+            "friction": 0.9
+      }
+    },
+     "o": {
+        "type": "block",
+        "setings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "./assets/Oakplank.png",
+            "friction": 0.9
+      }
+    },
     "render": {
       
       "scale": 1,
