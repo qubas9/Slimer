@@ -49,7 +49,7 @@ class GameLoop {
                 this.frameCount++;
                 if (currentTime - this.fpsLastTime >= 1000) {
                     const realFps = (this.frameCount * 1000) / (currentTime - this.fpsLastTime);
-                    console.log(`Actual FPS: ${realFps.toFixed(2)} (target: ${this.fps})`);
+                    //console.log(`Actual FPS: ${realFps.toFixed(2)} (target: ${this.fps})`);
                     this.frameCount = 0;
                     this.fpsLastTime = currentTime;
                 }
@@ -65,7 +65,7 @@ class GameLoop {
             clearTimeout(this.timerId);
             this.timerId = null;
         }
-        console.log("Game loop stopped.");
+        //console.log("Game loop stopped.");
     }
 
     step() {

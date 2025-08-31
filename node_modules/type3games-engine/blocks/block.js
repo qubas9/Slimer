@@ -22,7 +22,7 @@ class Block extends Sprite {
         if (physic && typeof physic.addBlock === "function") {
             physic.addBlock(this); // Assuming physic is an instance of a class that manages physics
         } else {
-            console.log("physic is not defined or does not have an addBlock method.");
+            //console.log("physic is not defined or does not have an addBlock method.");
         }
     }
     /**
@@ -34,14 +34,14 @@ class Block extends Sprite {
         let bufer = Math.abs(direction.y);
         direction.y = Math.abs(direction.x);
         direction.x = bufer;//wap x and y to ensure correct direction handling
-        console.log("v"+entity.velocity.mag+" "+entity.velocity.x+" "+entity.velocity.y);
+        //console.log("v"+entity.velocity.mag+" "+entity.velocity.x+" "+entity.velocity.y);
         // if (entity.velocity.mag < 0.01){
         //     entity.velocity = new Vector(0,0); // Reset entity's velocity on collision
         // }else{
 
             entity.velocity.multTogether(direction); // Reset entity's velocity on collision
         // }
-        console.log("v"+entity.velocity.x+" "+entity.velocity.y);
+        //console.log("v"+entity.velocity.x+" "+entity.velocity.y);
         
     }
     /**

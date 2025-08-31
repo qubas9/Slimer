@@ -47,7 +47,7 @@ class Entity extends Sprite {
         // Apply gravity to the entity's velocity
         this.touching = []; // Reset touching array if on ground
         if (this.onGround) {
-            console.log("Entity is on the ground");
+            //console.log("Entity is on the ground");
             // Update ground sensors positions
             
         }else{
@@ -57,6 +57,12 @@ class Entity extends Sprite {
         
         // Update the entity's position based on its velocity
         this.velocity.add(Vector.mult(this.acceleration, deltaTime));
+        // if (Math.abs(this.velocity.x) < this.colisionOfsset){
+        //     this.velocity.x = 0; // Prevents the entity from moving too slowly
+        // }
+        // if (Math.abs(this.velocity.y) < this.colisionOfsset){
+        //     this.velocity.y = 0; // Prevents the entity from moving too slowly vertically
+        // }
         this.position.add(Vector.mult(this.velocity, deltaTime));
         
         // Update the hitbox position
@@ -96,29 +102,29 @@ class Entity extends Sprite {
 
     onCollision(block) {
         let positionDiferenc = Vector.sub(block.position, this.position);
-        console.log("v"+positionDiferenc.x+" "+positionDiferenc.y);
+        //console.log("v"+positionDiferenc.x+" "+positionDiferenc.y);
         if (Math.abs(positionDiferenc.y) > Math.abs(positionDiferenc.x)){
             if (positionDiferenc.y > 0) {
                 // Collision from above
-                console.log("Collision from above");
+                //console.log("Collision from above");
                 this.position.y = block.hitbox.position.y - this.height-this.colisionOfsset;
                 block.onCollision(this, new Vector(0,1)); // Notify the block of the collision
                 this.onGround = true; // Set onGround to true
                 this.pasibleOnGround.push(true); // Add to pasibleOnGround array
             }else {
                 // Collision from below
-                console.log("Collision from below");
+                //console.log("Collision from below");
                 this.position.y = block.hitbox.position.y + block.hitbox.offset2.y+this.colisionOfsset;
                 block.onCollision(this,new Vector(0,-1)); // Notify the block of the collision
             }
         }else {
             if (positionDiferenc.x > 0) {
                 // Collision from the left
-                console.log("Collision from the left");
+                //console.log("Collision from the left");
                 this.position.x = block.hitbox.position.x - this.width-this.colisionOfsset;
                 block.onCollision(this, new Vector(1,0)); // Notify the block of the collision
             } else {
-                console.log("Collision from the right");
+                //console.log("Collision from the right");
                 // Collision from the right
                 this.position.x = block.hitbox.position.x + block.hitbox.offset2.x+this.colisionOfsset;
                 block.onCollision(this, new Vector(-1,0)); // Notify the block of the collision

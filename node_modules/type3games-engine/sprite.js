@@ -53,7 +53,7 @@ class Sprite {
         if (render && typeof render.addSprite === "function") {
             render.addSprite(this);
         } else {
-            console.log("Render was not provided or does not have an addSprite method. Skipping sprite addition.");
+            //console.log("Render was not provided or does not have an addSprite method. Skipping sprite addition.");
         }
     }
   }

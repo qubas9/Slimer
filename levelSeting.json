@@ -76,11 +76,7 @@
     },
     "render": {
       
-      "scale": 1,
-      "cameraMinX": -882,
-      "cameraMaxX": 100,
-      "cameraMaxY": 100000,
-      "cameraMinY": 300,
+      "scale": 2,
       "background": [240, 240, 240]
     }
   }

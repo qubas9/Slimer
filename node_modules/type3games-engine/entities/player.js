@@ -54,7 +54,7 @@ class Player extends Entity {
         if (This.touching[0]/*&& !This.dragCorectionAplied*/){
             This.dragCorectionAplied = true
             This.touching.forEach((block) => {
-                console.log("right");
+                //console.log("right");
                 if (This.velocity.x < 0){
                     This.velocity.x /= block.friction
                 }
@@ -72,7 +72,7 @@ class Player extends Entity {
         if (This.touching[0]/*&& !This.dragCorectionAplied*/){
             This.dragCorectionAplied = true
         This.touching.forEach((block) => {
-                console.log("right");
+                //console.log("right");
                 if (This.velocity.x > 0){
                     This.velocity.x /= block.friction
                 }

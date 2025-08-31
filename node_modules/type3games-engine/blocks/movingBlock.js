@@ -58,6 +58,9 @@ class MovingBlock extends Block {
         this.exeptedError = this.deltaTime / 1000;
         this.position.add(Vector.mult(this.velocity,deltaTime));
         this.hitbox.updatePosition(this.position);
+        console.log(`MovingBlock position: ${this.position.x}, ${this.position.y}`);
+        console.log(`MovingBlock velocity: ${this.velocity.x}, ${this.velocity.y}`);
+        console.log(`MovingBlock end: ${this.end.x}, ${this.end.y}`);
         
         // Check if the block has reached the end of its path
         if (Vector.sub(this.position, this.end).mag + this.exeptedError < Vector.mult(this.velocity,deltaTime).mag || Vector.sub(this.position, this.start).mag + this.exeptedError < Vector.mult(this.velocity,deltaTime).mag) {

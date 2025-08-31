@@ -124,7 +124,7 @@ class Control {
             while (this.recordedEvents.length && this.recordedEvents[0].frame == this.playbackFrameCounter) {
                 const event = this.recordedEvents.shift();
                 const simulatedEvent = new KeyboardEvent(event.type, { key: event.key });
-                console.log(`Simulating ${event.type} for key: ${event.key} at frame ${event.frame}`);
+                //console.log(`Simulating ${event.type} for key: ${event.key} at frame ${event.frame}`);
                 
                 if (event.type === "keydown") {
                     this._handleKeyDown(simulatedEvent);
