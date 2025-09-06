@@ -137,6 +137,9 @@ class Render {
             callback();
         }
   }
+    destroy() {
+        document.body.removeChild(this.canvas);
+    }
 }
 
 

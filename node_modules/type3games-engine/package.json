@@ -1,7 +1,7 @@
 {
   "name": "type3games-engine",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Modulární herní engine pro 2D hry v JavaScriptu",
   "main": "engine.js",
   "keywords": [
