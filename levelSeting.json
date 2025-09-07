@@ -72,6 +72,16 @@
             "height": 32,
             "imageSrc": "./assets/Oakplank.png",
             "friction": 0.9
+        }
+    },
+      "e": {
+        "type": "eventBlock",
+        "setings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "./assets/Stone-Brick.png",
+            "friction": 0.9,
+            "onCollisionEvent": "NextLevel"
       }
     },
     "render": {
