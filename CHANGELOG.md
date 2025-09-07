@@ -2,6 +2,14 @@
 
 NOT All notable changes to this project will be documented in this file.
 
+## UNRELEASED
+
+### CHANGE
+-There aren't two player characters anymore
+
+### UPDATE
+-engine updated to 2.2.1 https://github.com/qubas9/Engine/releases/tag/v2.2.1
+
 ## [0.0.1-3] - 2025-09-07
 
 ### FIX

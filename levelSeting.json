@@ -11,11 +11,12 @@
         "onClickAcceleration": 200,
         "jumpAcceleration": 110,
         "inAirDrag": 1,
+        "inAirAccelerationDrag": 0.9,
         "gravity": {
           "x": 0,
           "y": 300
         },
-        "maxXSpeed": 640,
+        "maxXSpeed": 320,
         "maxBoost": 1200,
         "colisionOfsset": 0.3
       }
