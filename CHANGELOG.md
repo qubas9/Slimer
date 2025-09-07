@@ -1,6 +1,12 @@
 # Changelog
 
 NOT All notable changes to this project will be documented in this file.
+
+## [Unreleased]
+
+### FIX
+-github pages is working
+
 ## [0.0.1-2] - 2025-09-07
 
 ### ADD
