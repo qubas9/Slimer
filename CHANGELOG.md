@@ -2,7 +2,7 @@
 
 NOT All notable changes to this project will be documented in this file.
 
-## UNRELEASED
+## [Unreleased]
 
 ### CHANGE
 -There aren't two player characters anymore
