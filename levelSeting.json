@@ -80,7 +80,7 @@
         "setings": {
             "width": 32,
             "height": 32,
-            "imageSrc": "./assets/Stone-Brick.png",
+            "imageSrc": "./assets/Finish1.png",
             "friction": 0.9,
             "onCollisionEvent": "NextLevel"
       }
