@@ -6,6 +6,7 @@ NOT All notable changes to this project will be documented in this file.
 
 ### ADD
 
+-tutorial
 -level3
 -leveltest
 -debug level testSite unplayble in game
