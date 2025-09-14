@@ -85,6 +85,16 @@
             "onCollisionEvent": "NextLevel"
       }
     },
+    "eb": {
+        "type": "eventBlock",
+        "setings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "./assets/Stone-Brick.png",
+            "friction": 0.9,
+            "onCollisionEvent": "NextLevel"
+      }
+    },
     "render": {
       
       "scale": 2,

@@ -4,6 +4,12 @@ NOT All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### ADD
+
+-level3
+-leveltest
+-debug level testSite unplayble in game
+
 ### CHANGE
 -There aren't two player characters anymore
 
