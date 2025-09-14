@@ -8,7 +8,7 @@
 <body>
     
     <script type="module">
-        import {LevelLoader} from "https://unpkg.com/type3games-engine/engine.js"
+        import {LevelLoader,Event} from "https://unpkg.com/type3games-engine/engine.js"
             console.log(LevelLoader);
             let loader = new LevelLoader({pathPrefix:"",levelList:["tutorial","level","level3","level1","level2","leveltest"]})
             loader.loadDefaultFromJSON("./levelSeting.json")
