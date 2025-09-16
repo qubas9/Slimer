@@ -23,6 +23,9 @@
                 console.log(`time:${time}s`)
                 time = 0;
             })
+            Event.on("MaxSpeedReached",()=>{
+                console.log(`MaxSpeedReached!`)
+            })
     </script>
 </body>
 </html>
