@@ -13,6 +13,8 @@ NOT All notable changes to this project will be documented in this file.
 
 ### CHANGE
 -There aren't two player characters anymore
+-level1 is now working with new movement
+-level2 is now working with new movement
 
 ### UPDATE
 -engine updated to 2.2.1 https://github.com/qubas9/Engine/releases/tag/v2.2.1
