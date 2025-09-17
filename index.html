@@ -19,8 +19,10 @@
                 time+=deltaTime;
                 
             })
+            let title =document.querySelector("title")
             Event.on("NextLevel",()=>{
                 console.log(`time:${time}s`)
+                title.innerHTML = `time:${time}s`
                 time = 0;
             })
             Event.on("MaxSpeedReached",()=>{
