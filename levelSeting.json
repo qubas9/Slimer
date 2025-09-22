@@ -30,6 +30,16 @@
             "friction": 0.9
       }
     },
+    "mb": {
+        "type": "movingBlock",
+        "setings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "./assets/Stone-Brick.png",
+            "friction": 0.9,
+            "routeTime": 2
+      }
+    },
     "g": {
         "type": "block",
         "setings": {
