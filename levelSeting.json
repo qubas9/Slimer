@@ -37,7 +37,7 @@
             "height": 32,
             "imageSrc": "./assets/Stone-Brick.png",
             "friction": 0.9,
-            "routeTime": 2
+            "routeTime": 5
       }
     },
     "g": {
