@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     
@@ -15,19 +16,50 @@
             loader.loadDefaultFromJSON("./levelSeting.json")
             loader.loadJSON("./tutorial.json")
             let time = 0;
-            Event.on("Frame",(deltaTime)=>{
-                time+=deltaTime;
-                
-            })
-            let title =document.querySelector("title")
-            Event.on("NextLevel",()=>{
-                console.log(`time:${time}s`)
-                title.innerHTML = `time:${time}s`
+            let level;
+            let totalTime = 0;
+            
+            Event.on("LevelLoading",(lvl)=>{
+                level = lvl;
+                totalTime += time;
                 time = 0;
             })
-            Event.on("MaxSpeedReached",()=>{
-                console.log(`MaxSpeedReached!`)
+            
+            Event.on("Frame",(deltaTime)=>{
+                time+=deltaTime;
+                if (time>level.maxTime){
+                    Event.emit("End")
+                    loader.loadJSON(`./${level.name}.json`)
+                }
+                
             })
+
+            Event.on("RenderHUD",(ctx,canvas)=>{
+                ctx.fillStyle = "black"
+                ctx.font = "100px FieldGuide, sans-serif"
+                let timeToRender = level.maxTime - time 
+                timeToRender = Math.floor(timeToRender*1000)/1000
+                     ctx.fillText(`${timeToRender}s`,canvas.width-300,100)
+                
+            })
+
+            Event.on("NoMoreLevels",()=>{
+                totalTime += time;
+                Event.emit("End")
+                let h1 = document.createElement("h1");
+                h1.innerHTML = `You Win!<br>in ${Math.floor((totalTime)*1000)/1000}s`;
+                document.body.appendChild(h1);
+            })
+
+            let title =document.querySelector("title")
+            // Event.on("NextLevel",()=>{
+            //     console.log(`time:${time}s`)
+            //     title.innerHTML = `time:${time}s`
+            //     time = 0;
+            // })
+            // Event.on("MaxSpeedReached",()=>{
+            //     console.log(`MaxSpeedReached!`)
+            // })
     </script>
 </body>
 </html>

@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'FieldGuide';
+    src: url('./assets/FieldGuide.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'FieldGuide', sans-serif;
+    overflow: hidden;
+    background: #fff;
+}
+
+h1 {
+    font-family: 'FieldGuide', sans-serif;
+    font-size: 12vw;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    line-height: 1.1;
+    white-space: pre-line;
+}
