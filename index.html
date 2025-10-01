@@ -3,63 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Slimer - Retro Menu</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    
-    <script type="module">
-        import {LevelLoader} from "https://unpkg.com/type3games-engine/engine.js"
-        import {Event} from "https://unpkg.com/type3games-engine/coretools.js"
-            console.log(LevelLoader);
-            let loader = new LevelLoader({pathPrefix:"",levelList:["tutorial","level","level3","level1","level2","level4","level5","leveltest"]})
-            loader.loadDefaultFromJSON("./levelSeting.json")
-            loader.loadJSON("./tutorial.json")
-            let time = 0;
-            let level;
-            let totalTime = 0;
-            
-            Event.on("LevelLoading",(lvl)=>{
-                level = lvl;
-                totalTime += time;
-                time = 0;
-            })
-            
-            Event.on("Frame",(deltaTime)=>{
-                time+=deltaTime;
-                if (time>level.maxTime){
-                    Event.emit("End")
-                    loader.loadJSON(`./${level.name}.json`)
-                }
-                
-            })
-
-            Event.on("RenderHUD",(ctx,canvas)=>{
-                ctx.fillStyle = "black"
-                ctx.font = "100px FieldGuide, sans-serif"
-                let timeToRender = level.maxTime - time 
-                timeToRender = Math.floor(timeToRender*1000)/1000
-                     ctx.fillText(`${timeToRender}s`,canvas.width-300,100)
-                
-            })
-
-            Event.on("NoMoreLevels",()=>{
-                totalTime += time;
-                Event.emit("End")
-                let h1 = document.createElement("h1");
-                h1.innerHTML = `You Win!<br>in ${Math.floor((totalTime)*1000)/1000}s`;
-                document.body.appendChild(h1);
-            })
-
-            let title =document.querySelector("title")
-            // Event.on("NextLevel",()=>{
-            //     console.log(`time:${time}s`)
-            //     title.innerHTML = `time:${time}s`
-            //     time = 0;
-            // })
-            // Event.on("MaxSpeedReached",()=>{
-            //     console.log(`MaxSpeedReached!`)
-            // })
+    <div class="menu">
+        <div class="menu-title">SLIMER </div>
+        <button class="menu-btn" onclick="startGame()">Start Game</button>
+        <button class="menu-btn-faded" onclick="showHowToPlay()">How to Play</button>
+        <button class="menu-btn-faded" onclick="showCredits()">Credits</button>
+        <div class="menu-footer">Type3Games</div>
+    </div>
+    <script>
+        function startGame() {
+            window.location.href = "./play.html";
+        }
+        function showHowToPlay() {
+           // alert("Use arrow keys or WASD to move.\nReach the finish line before time runs out!\nBeware of obstacles and collect power-ups!");
+        }
+        function showCredits() {
+           // alert("Slimer\nCreated by Type3Games\nFont: FieldGuide\n© 2025");
+        }
     </script>
 </body>
 </html>
