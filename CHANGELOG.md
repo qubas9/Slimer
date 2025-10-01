@@ -6,6 +6,8 @@ NOT All notable changes to this project will be documented in this file.
 
 ### ADD
 
+-timer mechanic
+-menu
 -tutorial
 -level3
 -leveltest
