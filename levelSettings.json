@@ -9,7 +9,7 @@
         "width": 30,
         "height": 30,
         "onClickAcceleration": 200,
-        "jumpAcceleration": 110,
+        "jumpAcceleration": 220,
         "inAirDrag": 0.995,
         "inAirAccelerationDrag": 0.4,
         "gravity": {

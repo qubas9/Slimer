@@ -22,7 +22,7 @@ NOT All notable changes to this project will be documented in this file.
 -roadTime of "mb" from 2 to 5
 
 ### UPDATE
--engine updated to 2.2.1 https://github.com/qubas9/Engine/releases/tag/v2.2.1
+-engine updated to 3.0.0 https://github.com/qubas9/Engine/releases/tag/v3.0.0
 
 ## [0.0.1-3] - 2025-09-07
 

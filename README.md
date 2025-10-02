@@ -11,7 +11,7 @@ Open `index.html` in your browser to play the game. No build step is required.
 - `index.html` — Main entry point for the game
 - `assets/` — Game assets (images, font)
 - `level*.json` — Level definitions
-- `levelSeting.json` — Level settings
+- `levelSettings.json` — Level settings
 
 ## Dependencies
 - [type3games-engine](https://www.npmjs.com/package/type3games-engine)
