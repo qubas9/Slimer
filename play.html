@@ -14,7 +14,7 @@
             console.log(LevelLoader);
             let loader = new LevelLoader({pathPrefix:"",levelList:["tutorial","level","level3","level1","level2","level4","level5","leveltest"]})
             Event.on("DefaultSettingsJSONLoaded",()=>{
-                loader.loadJSON("./level6.json")
+                loader.loadJSON("./tutorial.json")
             })
             loader.loadDefaultFromJSON("./levelSettings.json")
             let time = 0;
