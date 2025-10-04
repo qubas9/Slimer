@@ -15,6 +15,7 @@ NOT All notable changes to this project will be documented in this file.
 -level4
 -level5 
 -level6
+-leveltest2
 
 ### CHANGE
 -There aren't two player characters anymore

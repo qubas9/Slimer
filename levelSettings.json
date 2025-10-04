@@ -108,7 +108,7 @@
     "render": {
       
       "scale": 2,
-      "background": [240, 240, 240]
+      "background": [145, 210, 250]
     }
   }
 }
