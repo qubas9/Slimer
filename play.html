@@ -12,7 +12,7 @@
         import {LevelLoader} from "https://unpkg.com/type3games-engine/engine.js"
         import {Event} from "https://unpkg.com/type3games-engine/coretools.js"
             console.log(LevelLoader);
-            let loader = new LevelLoader({pathPrefix:"",levelList:["tutorial","level","level3","level1","level2","level4","level5","leveltest","leveltest2"]})
+            let loader = new LevelLoader({pathPrefix:"",levelList:["tutorial","level","level3","level1","level2","level4","level5","level6","leveltest","leveltest2"]})
             Event.on("DefaultSettingsJSONLoaded",()=>{
                 loader.loadJSON("./tutorial.json")
             })
