@@ -2,10 +2,16 @@
   "plugins": {
     "@release-it/keep-a-changelog": {
       "infile": "CHANGELOG.md"
+    },
+    "./release-it-itchio.js": {
+      "baseTarget": "qubas9/slimer",
+      "stableChannel": "stable",
+      "prereleaseChannel": "beta"
     }
   },
   "git": {
-    "tagName": "v${version}"
+    "tagName": "v${version}",
+    "requireCleanWorkingDir": true
   },
   "npm": {
     "publish": false

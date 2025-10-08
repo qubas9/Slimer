@@ -1,1 +1,3 @@
 node_modules
+.release-it.json
+release-it-itchio.js
