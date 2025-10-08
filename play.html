@@ -23,6 +23,19 @@
             let level;
             let totalTime = 0;
             
+            // Restart current level: emit End and reload the level JSON
+            function restart() {
+                Event.emit("End");
+                if (loader && level && level.name) {
+                    loader.loadJSON(`./${level.name}.json`);
+                }
+                 let backBtn = document.getElementById("back-btn");
+                // if (!backBtn && canvas) {
+                   if (backBtn) {
+                        backBtn.remove();  
+                   }
+            }
+            
             Event.on("LevelLoading",(lvl)=>{
                 level = lvl;
                 totalTime += time;
@@ -32,8 +45,7 @@
             Event.on("Frame",(deltaTime)=>{
                 time+=deltaTime;
                 if (time>level.maxTime){
-                    Event.emit("End")
-                    loader.loadJSON(`./${level.name}.json`)
+                    restart();
                 }
                 
             })
@@ -43,13 +55,43 @@
                 ctx.font = "100px FieldGuide, sans-serif"
                 let timeToRender = level.maxTime - time 
                 timeToRender = Math.floor(timeToRender*1000)/1000
-                     ctx.fillText(`${timeToRender}s`,canvas.width-300,100)
+                     ctx.fillText(`${timeToRender}`,canvas.width-300,100)
+                     ctx.font = "20px FieldGuide, sans-serif"
+                     ctx.fillText(`level name: ${level.name}`,canvas.width-300,130)
+                // Draw Back button on the left side of the screen
+                let backBtn = document.getElementById("back-btn");
+                if (!backBtn && canvas) {
+                   
+                    backBtn = document.createElement("button");
+                    backBtn.id = "back-btn";
+                    backBtn.className = "menu-btn";
+                    backBtn.textContent = "Restart";
+                    // Keep the button visible on the left side of the viewport
+                    backBtn.style.position = "fixed";
+                    backBtn.style.left = "20px";
+                    backBtn.style.bottom = "20px";
+                    backBtn.style.zIndex = 1000;
+                    document.body.appendChild(backBtn);
+                    backBtn.onclick = () => restart();
+                } else if (backBtn && canvas) {
+                    // Ensure it remains fixed on the left side if already created
+                    
+                    backBtn.style.position = "fixed";
+                    backBtn.style.left = "20px";
+                    backBtn.style.bottom = "20px";
+                    backBtn.style.zIndex = 1000;
+                }
                 
             })
 
             Event.on("NoMoreLevels",()=>{
                 totalTime += time;
                 Event.emit("End")
+                let backBtn = document.getElementById("back-btn");
+                // if (!backBtn && canvas) {
+                   if (backBtn) {
+                        backBtn.remove();  
+                   }
                 let h1 = document.createElement("h1");
                 let a = document.createElement("a");
                 let button =document.createElement("button");

@@ -96,3 +96,17 @@ h1 {
             font-size: 1.5vw;
             opacity: 0.7;
         }
+
+        /* HUD back/restart button: match menu button sizing but don't stretch full width */
+        #back-btn.menu-btn {
+    width: auto;
+    display: inline-flex;       /* flex místo inline-block */
+    justify-content: center;    /* horizontálně */
+    align-items: center;        /* vertikálně */
+    font-size: 3vw;
+    padding: 0.7vw 3vw;
+    margin: 0;
+    min-width: 88px;
+    box-sizing: border-box;
+}
+        
