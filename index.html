@@ -11,7 +11,13 @@
     import feedback from "./feedback.js";
 
     // Načti verzi a připrav odkaz
-    feedback.load();
+    feedback.load(() => {
+        const footer = document.getElementsByClassName("menu-footer")[0];
+        if (footer) {
+            footer.innerHTML = "version " + feedback.version + "<br>by Type3Games";
+        }
+    });
+
 
     window.startGame = function() {
         window.location.href = "./play.html";
@@ -35,7 +41,7 @@
         <button class="menu-btn" onclick="startGame()">Start Game</button>
     <button class="menu-btn" onclick="showFeedback()">Feedback</button>
         <button class="menu-btn-faded" onclick="showCredits()">Credits</button>
-        <div class="menu-footer">version 0.0.1 <br>by Type3Games</div>
+        <div class="menu-footer">version not found <br>by Type3Games</div>
     </div>
 </body>
 </html>
