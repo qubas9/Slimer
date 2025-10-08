@@ -7,23 +7,35 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <script type="module">
+    import feedback from "./feedback.js";
+
+    // Načti verzi a připrav odkaz
+    feedback.load();
+
+    window.startGame = function() {
+        window.location.href = "./play.html";
+    }
+
+    window.showFeedback = function() {
+        window.open(feedback.url);
+    }
+
+    window.showCredits = function() {
+        // alert("Slimer\nCreated by Type3Games\nFont: FieldGuide\n© 2025");
+    }
+
+    window.showHowToPlay = function() {
+        // alert("Use arrow keys or WASD to move.\nReach the finish line before time runs out!\nBeware of obstacles and collect power-ups!");
+    }
+</script>
+
     <div class="menu">
         <div class="menu-title">SLIMER </div>
         <button class="menu-btn" onclick="startGame()">Start Game</button>
-        <button class="menu-btn-faded" onclick="showHowToPlay()">How to Play</button>
+    <button class="menu-btn" onclick="showFeedback()">Feedback</button>
         <button class="menu-btn-faded" onclick="showCredits()">Credits</button>
         <div class="menu-footer">version 0.0.1 <br>by Type3Games</div>
     </div>
-    <script>
-        function startGame() {
-            window.location.href = "./play.html";
-        }
-        function showHowToPlay() {
-           // alert("Use arrow keys or WASD to move.\nReach the finish line before time runs out!\nBeware of obstacles and collect power-ups!");
-        }
-        function showCredits() {
-           // alert("Slimer\nCreated by Type3Games\nFont: FieldGuide\n© 2025");
-        }
-    </script>
 </body>
 </html>

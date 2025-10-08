@@ -9,9 +9,11 @@
 <body>
     
     <script type="module">
+        import Feedback from "./feedback.js"
         import {LevelLoader} from "https://unpkg.com/type3games-engine/engine.js"
         import {Event} from "https://unpkg.com/type3games-engine/coretools.js"
             console.log(LevelLoader);
+            Feedback.load()
             let loader = new LevelLoader({pathPrefix:"",levelList:["tutorial","level","level3","level1","level2","level4","level5","level6","leveltest","leveltest2"]})
             Event.on("DefaultSettingsJSONLoaded",()=>{
                 loader.loadJSON("./tutorial.json")
@@ -59,7 +61,7 @@
                 button2.className = "menu-btn"
                 button2.innerText = "Feedback"
                 let a2 = document.createElement("a");
-                a2.href = "https://docs.google.com/forms/d/e/1FAIpQLSf0uOhSqOoGlKBKwCfAeQKKaHGlcCr5zbJ7SKkjBGPYIHPHvg/viewform?usp=dialog"
+                a2.href = Feedback.url
                 a2.target="_blank"
                 a2.appendChild(button2)
                 h1.innerHTML = `You Win!<br>in ${Math.floor((totalTime)*1000)/1000}s`;
