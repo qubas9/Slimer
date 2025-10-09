@@ -2,7 +2,7 @@
 
 NOT All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.0.1-7] - 2025-10-09
 
 - release-it test
 
