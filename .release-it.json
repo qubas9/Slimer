@@ -2,6 +2,11 @@
   "hooks": {
     "afterRelease": "node release-it-itchio-upload.js"
   },
+  "plugins": {
+    "@release-it/keep-a-changelog": {
+      "infile": "CHANGELOG.md"
+    }
+  },
   "git": {
     "tagName": "v${version}",
     "requireCleanWorkingDir": true
