@@ -1,13 +1,6 @@
 {
-  "plugins": {
-    "@release-it/keep-a-changelog": {
-      "infile": "CHANGELOG.md"
-    },
-    "./release-it-itchio.cjs": {
-      "baseTarget": "qubas9/slimer",
-      "stableChannel": "stable",
-      "prereleaseChannel": "beta"
-    }
+  "hooks": {
+    "afterRelease": "node release-it-itchio-upload.js"
   },
   "git": {
     "tagName": "v${version}",
