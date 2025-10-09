@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "afterRelease": "node release-it-itchio-upload.js"
+    "afterRelease": "node release-it-itchio-upload.cjs"
   },
   "plugins": {
     "@release-it/keep-a-changelog": {
