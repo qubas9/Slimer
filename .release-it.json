@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "afterRelease": "RELEASE_IT_NEXT_VERSION=${version} node ./release-it-itchio.cjs"
+    "after:git:release": "RELEASE_IT_NEXT_VERSION=${version} node ./release-it-itchio.cjs"
     
   },
   "plugins": {
