@@ -1,8 +1,7 @@
 {
   "hooks": {
-    "afterRelease": [
-      "node ./release-it-itchio.cjs"
-    ]
+    "afterRelease": "RELEASE_IT_NEXT_VERSION=${version} node ./release-it-itchio.cjs"
+    
   },
   "plugins": {
     "@release-it/keep-a-changelog": {
