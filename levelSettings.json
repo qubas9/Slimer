@@ -105,6 +105,33 @@
             "onCollisionEvent": "NextLevel"
       }
     },
+     "i": {
+        "type": "block",
+        "settings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "./assets/Ice_block.png",
+            "friction": 0.9
+        }
+    },
+    "w": {
+        "type": "block",
+        "settings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "./assets/Snow.png",
+            "friction": 0.9
+        }
+    },
+    "l": {
+        "type": "block",
+        "settings": {
+            "width": 32,
+            "height": 32,
+            "imageSrc": "./assets/Snow_block.png",
+            "friction": 0.9
+        }
+    },
     "render": {
       
       "scale": 2,
