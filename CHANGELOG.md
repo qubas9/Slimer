@@ -9,6 +9,7 @@ NOT All notable changes to this project will be documented in this file.
 - Snow block
 - Ice block
 - Level7
+
 ## [0.0.1-15] - 2025-10-09
 
 - release-it test
