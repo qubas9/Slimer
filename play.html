@@ -13,7 +13,7 @@
         import {LevelLoader} from "https://unpkg.com/type3games-engine/engine.js"
         import {Event} from "https://unpkg.com/type3games-engine/coretools.js"
             console.log(LevelLoader);
-            Feedback.load()
+            Feedback.load();
             let loader = new LevelLoader({pathPrefix:"",levelList:["levelNamedTutorial","level","level3","level1","level2","level4","level5","level6","level7","level8","leveltest","leveltest2","leveltest3"]})
             Event.on("DefaultSettingsJSONLoaded",()=>{
                 loader.loadJSON("./levelNamedTutorial.json")
@@ -122,5 +122,6 @@
             //     console.log(`MaxSpeedReached!`)
             // })
     </script>
+    <script src="casm.js" type="module"></script>
 </body>
 </html>

@@ -2,6 +2,10 @@ const Feedback = {
   url: "https://docs.google.com/forms/d/e/1FAIpQLSf0uOhSqOoGlKBKwCfAeQKKaHGlcCr5zbJ7SKkjBGPYIHPHvg/viewform?usp=pp_url&entry.286032006=v0.0.1",
 
   load(callback) {
+    if (this.version) {
+      if (callback) callback();
+      return;
+    }
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "./package.json", true);
     xhr.responseType = "json";
